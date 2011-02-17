@@ -10,18 +10,22 @@
 ///////////////////////////////////////
 -->
  
-<html>
-    <head>
-    <link href="style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html> 
+<html> 
+ 
+<head> 
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="libs/base64.js"></script>
     <script type="text/javascript" src="libs/canvas2image.js"></script>
     <script type="text/javascript" src="dynamic.js"></script>
     <script type="text/javascript" src="draw.js"></script>
-    </head>
+    <title>PhyloCC - Canvas based card creator for Phylo</title>
+</head>
     
     <body onload="draw()">
     <h1>Phylo- web based card creator</h1>
-    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylo.org">Phylo.org</a>.
+    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.
     <br />
     <br />
     <div class="ribbon">
@@ -32,7 +36,7 @@
     <div id="container" style="width: 800px;">
 
     <div id="controls" style="float:right; width:500px;">
-    <form name="parameters">
+    <form name="parameters" action="post">
     Card type: <input type="radio" name="card-type" value="organism" checked="checked">Organism
     <input type="radio" name="card-type" value="habitat" disabled="disabled">Habitat
     <input type="radio" name="card-type" value="event" disabled="disabled">Event
@@ -45,16 +49,16 @@
     <br />    
     Common name: <input type="text" id="common-name" value="Scarlet Macaw"  onChange="draw()"/> <br />
     Latin name: <input type="text" id="latin-name" value="Ara Macao" onChange="draw()"> <br />
-    Scale:  <input type="numeric" id="scale" value="6" onChange="draw()"><br />
-    Foodchain: <input type="numeric" id="foodchain-num" value="2" onChange="draw()"><br />
-    Diet color: <input type="numeric" id="diet-type" value="3" onChange="draw()"><br />
+    Scale:  <input type="text" id="scale" value="6" onChange="draw()"><br />
+    Foodchain: <input type="text" id="foodchain-num" value="2" onChange="draw()"><br />
+    Diet color: <input type="text" id="diet-type" value="3" onChange="draw()"><br />
     <br />
     
     Path to image: <input type="text" id="image" value="http://farm6.static.flickr.com/5219/5386837958_9ebd5be82b_o_d.jpg" onChange="draw();"><br /> 
 
     <br />
     Evolutionary tree: <input size="30" type="text" id="evolutionary-tree" value="Animalia, Chordata, Aves" onChange="draw()"><br />    
-    Point value: <input type="numeric" id="point-value" value="5" onChange="draw()"><br />
+    Point value: <input type="text" id="point-value" value="5" onChange="draw()"><br />
     <br />
     
         Special: <br />
