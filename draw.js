@@ -222,7 +222,8 @@ function drawEvolutionaryTree(context, names){
     context.fillStyle = "rgb(9,83,168)";
     context.font         = '8px courier';
     context.textBaseline = 'top';
-    context.fillText(names, 135, 215);    
+    size=context.measureText(names);
+    context.fillText(names, 255-Math.round(size.width), 215); 
 }
 
 function drawArtistName(context, artistName){
