@@ -15,12 +15,20 @@
  
 <head> 
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>PhyloCC - Canvas based card creator for Phylo</title>
+
+    <!-- Colorpicker lib -->
+	<link rel="stylesheet" href="libs/colorpicker/css/colorpicker.css" type="text/css" />
+	<script type="text/javascript" src="libs/colorpicker/js/jquery.js"></script>
+	<script type="text/javascript" src="libs/colorpicker/js/colorpicker.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/eye.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/utils.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/layout.js?ver=1.0.2"></script>
+    
+    <!-- Our own includes -->
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="libs/base64.js"></script>
-    <script type="text/javascript" src="libs/canvas2image.js"></script>
     <script type="text/javascript" src="dynamic.js"></script>
     <script type="text/javascript" src="draw.js"></script>
-    <title>PhyloCC - Canvas based card creator for Phylo</title>
 </head>
     
     <body onload="draw()">
@@ -42,8 +50,10 @@
     <input type="radio" name="card-type" value="event" disabled="disabled">Event
     <input type="radio" name="card-type" value="starter" disabled="disabled">Starter
     <br />
+    <br />
         
-    Background color:
+    Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+    <br />
     <br />
 
     <br />    
