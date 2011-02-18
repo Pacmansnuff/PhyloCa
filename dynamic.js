@@ -110,11 +110,11 @@ function getSpecial(){
 
 
 function saveAsPNG(){
-    //var canvas = document.getElementById("canvas");
-    //var context = canvas.getContext("2d");
-    //var img     = canvas.toDataURL("image/png");
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var img     = canvas.toDataURL("image/png");
 
-    //document.write('<img src="'+img+'"/>');
+    document.write('<img src="'+img+'"/>');
 }
 
 function getTerrains(){
