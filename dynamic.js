@@ -162,7 +162,7 @@ function buildTerrainArray(terrains){
     }
 
     if (count==2){ //if only 2 terrains are selected, the third one will be the same as first.
-        array[2]=array[1]
+        array[2]=array[0]
         count++;
     }
 
