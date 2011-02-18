@@ -17,9 +17,11 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>PhyloCC - Canvas based card creator for Phylo</title>
 
+    <!-- Jquery lib -->
+	<script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    
     <!-- Colorpicker lib -->
 	<link rel="stylesheet" href="libs/colorpicker/css/colorpicker.css" type="text/css" />
-	<script type="text/javascript" src="libs/colorpicker/js/jquery.js"></script>
 	<script type="text/javascript" src="libs/colorpicker/js/colorpicker.js"></script>
     <script type="text/javascript" src="libs/colorpicker/js/eye.js"></script>
     <script type="text/javascript" src="libs/colorpicker/js/utils.js"></script>
@@ -53,6 +55,7 @@
     <br />
         
     Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+    <script type="text/javascript">$('colorSelector').ColorPickerSetColor('#ffffff');</script>
     <br />
     <br />
 
