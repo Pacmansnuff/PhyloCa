@@ -33,10 +33,18 @@ function draw() {
     var special=getSpecial();
     var desc=getDescription();
     var terrains= getTerrains();
+<<<<<<< HEAD
     
     //draw
     drawTerrains(ctx, terrains);
     drawBackground(ctx);
+=======
+    //var color=getColor();
+    
+    //draw
+    drawTerrains(ctx, terrains);
+    drawBackground(ctx, color);
+>>>>>>> master
     drawImage(ctx);
     drawTitle(ctx, commonName);
     drawSubtitle(ctx, latinName);
@@ -59,7 +67,11 @@ function drawBackground(context, color){
     context.fillRect(0,0,270,410);
 
     //context.fillstyle = '#99f88d';
+<<<<<<< HEAD
     context.fillStyle = "rgb(153,248,141)"; //need to replace color; draws color bg
+=======
+    context.fillStyle = color; //need to replace color; draws color bg
+>>>>>>> master
     context.fillRect(10, 10, 250, 390);
 }
 

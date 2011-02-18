@@ -128,6 +128,20 @@ function getTerrains(){
     return buildTerrainArray(terrains);
 }
 
+<<<<<<< HEAD
+=======
+
+function setColor(hex){
+    color=hex;
+}
+
+function getColor(){
+    color="";
+    
+    return color;
+}
+
+>>>>>>> master
 function buildTerrainArray(terrains){
     atlas= new Array("desert", "forest", "freshwater", "grasslands", "ocean", "tundra", "urban")
     array= new Array("forest", "forest", "forest");

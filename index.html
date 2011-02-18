@@ -15,12 +15,30 @@
  
 <head> 
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<<<<<<< HEAD
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="libs/base64.js"></script>
     <script type="text/javascript" src="libs/canvas2image.js"></script>
     <script type="text/javascript" src="dynamic.js"></script>
     <script type="text/javascript" src="draw.js"></script>
     <title>PhyloCC - Canvas based card creator for Phylo</title>
+=======
+    <title>PhyloCC - Canvas based card creator for Phylo</title>
+
+    <!-- Jquery lib -->
+	<script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    
+    <!-- Colorpicker lib -->
+	<link rel="stylesheet" href="libs/colorpicker/css/colorpicker.css" type="text/css" />
+	<script type="text/javascript" src="libs/colorpicker/js/colorpicker.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/eye.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/utils.js"></script>
+    
+    <!-- Our own includes -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="dynamic.js"></script>
+    <script type="text/javascript" src="draw.js"></script>
+>>>>>>> master
 </head>
     
     <body onload="draw()">
@@ -42,8 +60,30 @@
     <input type="radio" name="card-type" value="event" disabled="disabled">Event
     <input type="radio" name="card-type" value="starter" disabled="disabled">Starter
     <br />
+<<<<<<< HEAD
         
     Background color:
+=======
+    <br />
+        
+
+        Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+
+        <script type="text/javascript">
+            color="99f88d"
+
+            $('#colorSelector div').css('backgroundColor', '#' + color);
+            $('#colorSelector').ColorPicker({
+                onChange: function(hsb, hex, rgb){
+                    setColor(hex);
+                    draw();
+                    $('#colorSelector div').css('backgroundColor', '#' + hex);
+                }
+            });
+            
+            </script>
+    <br />
+>>>>>>> master
     <br />
 
     <br />    
