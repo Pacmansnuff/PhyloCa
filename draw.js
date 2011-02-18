@@ -205,7 +205,7 @@ function drawTerrains(context, terrains){
 function drawEvolutionaryTree(context, names){
     context.fillStyle = "rgb(9,83,168)";
     context.font         = '8px courier';
-    context.textBaseline = 'right';
+    context.textBaseline = 'top';
     context.fillText(names, 135, 215);    
 }
 
