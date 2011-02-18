@@ -25,7 +25,6 @@
 	<script type="text/javascript" src="libs/colorpicker/js/colorpicker.js"></script>
     <script type="text/javascript" src="libs/colorpicker/js/eye.js"></script>
     <script type="text/javascript" src="libs/colorpicker/js/utils.js"></script>
-    <script type="text/javascript" src="libs/colorpicker/js/layout.js?ver=1.0.2"></script>
     
     <!-- Our own includes -->
     <link href="style.css" rel="stylesheet" type="text/css" />
@@ -54,8 +53,22 @@
     <br />
     <br />
         
-    Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
-    <script type="text/javascript">$('colorSelector').ColorPickerSetColor('#ffffff');</script>
+
+        Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+
+        <script type="text/javascript">
+            color="99f88d"
+
+            $('#colorSelector div').css('backgroundColor', '#' + color);
+            $('#colorSelector').ColorPicker({
+                onChange: function(hsb, hex, rgb){
+                    setColor(hex);
+                    draw();
+                    $('#colorSelector div').css('backgroundColor', '#' + hex);
+                }
+            });
+            
+            </script>
     <br />
     <br />
 
