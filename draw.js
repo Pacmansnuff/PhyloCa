@@ -55,7 +55,7 @@ function draw() {
     
 }
 
-function hex2rgb(hex) {
+function hex2rgb(hex) { //needs to be moved to utilities.js
 	if(hex.charAt(0) == "#") hex = hex.slice(1); //Remove the '#' char - if there is one.
 	hex = hex.toUpperCase();
 	var hex_alphabets = "0123456789ABCDEF";
