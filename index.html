@@ -1,0 +1,149 @@
+<!--
+///////////////////////////////////////
+// PhyloCC, Guillaume Ardaud, 2011
+//
+// This file should be distributed with 
+// a LICENSE file detailing under which 
+// clauses it is shared.
+//
+// http://github.com/gardaud/phylocc
+///////////////////////////////////////
+-->
+ 
+<!DOCTYPE html> 
+<html> 
+ 
+<head> 
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>PhyloCC - Canvas based card creator for Phylo</title>
+
+    <!-- Jquery lib -->
+	<script type="text/javascript" src="libs/jquery/jquery.js"></script>
+    
+    <!-- Colorpicker lib -->
+	<link rel="stylesheet" href="libs/colorpicker/css/colorpicker.css" type="text/css" />
+	<script type="text/javascript" src="libs/colorpicker/js/colorpicker.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/eye.js"></script>
+    <script type="text/javascript" src="libs/colorpicker/js/utils.js"></script>
+    
+    <!-- Our own includes -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="dynamic.js"></script>
+    <script type="text/javascript" src="draw.js"></script>
+</head>
+    
+    <body onload="draw()">
+    <h1>Phylo- web based card creator</h1>
+    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.
+    <br />
+    <br />
+    <div class="ribbon">
+        <a href="http://www.github.com/gardaud/phylocc/" rel="me">Fork me on GitHub</a>
+    </div>
+    
+    <hr />
+    <div id="container" style="width: 800px;">
+
+    <div id="controls" style="float:right; width:500px;">
+    <form name="parameters" action="post">
+    Card type: <input type="radio" name="card-type" value="organism" checked="checked">Organism
+    <input type="radio" name="card-type" value="habitat" disabled="disabled">Habitat
+    <input type="radio" name="card-type" value="event" disabled="disabled">Event
+    <input type="radio" name="card-type" value="starter" disabled="disabled">Starter
+    <br />
+    <br />
+        
+
+        Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+
+        <script type="text/javascript">
+            color="99f88d"
+
+            $('#colorSelector div').css('backgroundColor', '#' + color);
+            $('#colorSelector').ColorPicker({
+                onChange: function(hsb, hex, rgb){
+                    setColor(hex);
+                    draw();
+                    $('#colorSelector div').css('backgroundColor', '#' + hex);
+                }
+            });
+            
+            </script>
+    <br />
+    <br />
+
+    <br />    
+    Common name: <input type="text" id="common-name" value="Scarlet Macaw"  onChange="draw()"/> <br />
+    Latin name: <input type="text" id="latin-name" value="Ara Macao" onChange="draw()"> <br />
+    Scale:  <input type="text" id="scale" value="6" onChange="draw()"><br />
+    Foodchain: <input type="text" id="foodchain-num" value="2" onChange="draw()"><br />
+    Diet color: <input type="text" id="diet-type" value="3" onChange="draw()"><br />
+    <br />
+    
+    Path to image: <input type="text" id="image" value="http://farm6.static.flickr.com/5219/5386837958_9ebd5be82b_o_d.jpg" onChange="draw();"><br /> 
+
+    <br />
+    Evolutionary tree: <input size="30" type="text" id="evolutionary-tree" value="Animalia, Chordata, Aves" onChange="draw()"><br />    
+    Point value: <input type="text" id="point-value" value="5" onChange="draw()"><br />
+    <br />
+    
+        Special: <br />
+        <input type="text" size="50" id="special1" onChange="draw()" value="Ara macao has a FLIGHT of 2."/><br />
+        <input type="text" size="50" id="special2" onChange="draw()" value=""/><br />
+        <input type="text" size="50" id="special3" onChange="draw()" value=""/><br />
+        <input type="text" size="50" id="special4" onChange="draw()" value=""/><br />
+        <input type="text" size="50" id="special5" onChange="draw()" value=""/><br />
+        
+        
+        <br />
+        
+        Description: <br />
+        <input type="text" size="50" id="desc1" onChange="draw()" value="Ara macao make very loud, high &amp; sometimes "/><br />
+        <input type="text" size="50" id="desc2" onChange="draw()" value="low-pitched, throaty sounds that can be heard"/><br />
+        <input type="text" size="50" id="desc3" onChange="draw()" value="from many miles away."/><br />
+        <br />
+
+    
+    <br />
+    Climates: <br />
+        <input onChange="draw()" type="checkbox" name="climate" id="hot"/>Hot
+        <input onChange="draw()" type="checkbox" name="climate" id="warm" checked="checked"/>Warm
+        <input onChange="draw()" type="checkbox" name="climate" id="cool"/>Cool
+        <input onChange="draw()" type="checkbox" name="climate" id="cold"/>Cold<br />
+    
+        
+    <br />
+
+    Terrains: <br />
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain1"/>Desert
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain2" checked="checked"/>Forest
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain3"/>Freshwater
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain4"/>Grasslands
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain5"/>Ocean
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain6"/>Tundra
+        <input onChange="draw()" type="checkbox" name="terrain" id="terrain7"/>Urban
+
+        
+    <br />
+    <br />
+    Artist name: <input size="30"  type="text" id="artist-name" value="Drewho" onChange="draw()"><br />
+    Artist website: <input size="30" type="text" id="artist-website" value="drewho.deviantart.com" onChange="draw()"><br />
+    
+    <br />
+    <input style="visibility: hidden" type="submit" value="Save as PNG" onClick="saveAsPNG()" />
+    </form>
+    </div>
+
+
+    <div id="drawing-zone" style="float: left;">
+    <canvas id="canvas" width="270" height="410">
+    If you see this, then your browser is not supported. Please use the latest version of Google Chrome, Safari or Firefox.
+    </canvas>
+    </div>
+
+
+    <div style="clear:both;"></div>
+    </div>
+        
+    </body>
+</html>
