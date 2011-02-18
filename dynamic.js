@@ -110,11 +110,11 @@ function getSpecial(){
 
 
 function saveAsPNG(){
-    //var canvas = document.getElementById("canvas");
-    //var context = canvas.getContext("2d");
-    //var img     = canvas.toDataURL("image/png");
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var img     = canvas.toDataURL("image/png");
 
-    //document.write('<img src="'+img+'"/>');
+    document.write('<img src="'+img+'"/>');
 }
 
 function getTerrains(){
@@ -162,7 +162,7 @@ function buildTerrainArray(terrains){
     }
 
     if (count==2){ //if only 2 terrains are selected, the third one will be the same as first.
-        array[2]=array[1]
+        array[2]=array[0]
         count++;
     }
 

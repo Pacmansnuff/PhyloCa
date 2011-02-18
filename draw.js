@@ -55,12 +55,28 @@ function draw() {
     
 }
 
+function hex2rgb(hex) { //needs to be moved to utilities.js
+	if(hex.charAt(0) == "#") hex = hex.slice(1); //Remove the '#' char - if there is one.
+	hex = hex.toUpperCase();
+	var hex_alphabets = "0123456789ABCDEF";
+	var value = new Array(3);
+	var k = 0;
+	var int1,int2;
+	for(var i=0;i<6;i+=2) {
+		int1 = hex_alphabets.indexOf(hex.charAt(i));
+		int2 = hex_alphabets.indexOf(hex.charAt(i+1)); 
+		value[k] = (int1 * 16) + int2;
+		k++;
+	}
+	return ("rgb("+value[0]+","+value[1]+","+value[2]+")");
+}
+
 function drawBackground(context, color){
     context.fillStyle = "rgb(0,0,0)"; //draws border of card
     context.fillRect(0,0,270,410);
 
-    //context.fillstyle = '#99f88d';
-    context.fillStyle = color; //need to replace color; draws color bg
+    var rgbColor=hex2rgb(color); //we convert to RGB, otherwise Gecko is a pain.
+    context.fillStyle = rgbColor;
     context.fillRect(10, 10, 250, 390);
 }
 
@@ -118,16 +134,16 @@ function drawDietCircle(context, type){
 
 function drawFoodchainNum(context, num){
     context.fillStyle = "rgb(255,255,255)";
-    context.font         = 'bold 26px serif';
+    context.font         = 'bold 24px serif';
     context.textBaseline = 'top';
-    context.fillText(num, 233, 15);  
+    context.fillText(num, 233, 17);  
 }
 
 function drawScale(context, scale){
     context.fillStyle = "rgb(0,0,0)";
-    context.font         = 'bold 26px serif';
+    context.font         = 'bold 24px serif';
     context.textBaseline = 'top';
-    context.fillText(scale, 205, 15);   
+    context.fillText(scale, 205, 17);   
 }
 
 function drawClimate(context, climates){
@@ -205,8 +221,9 @@ function drawTerrains(context, terrains){
 function drawEvolutionaryTree(context, names){
     context.fillStyle = "rgb(9,83,168)";
     context.font         = '8px courier';
-    context.textBaseline = 'right';
-    context.fillText(names, 135, 215);    
+    context.textBaseline = 'top';
+    size=context.measureText(names);
+    context.fillText(names, 255-Math.round(size.width), 215); 
 }
 
 function drawArtistName(context, artistName){

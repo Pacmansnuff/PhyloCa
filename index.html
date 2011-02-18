@@ -34,7 +34,8 @@
     
     <body onload="draw()">
     <h1>Phylo- web based card creator</h1>
-    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.
+    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.<br />
+    Please use the latest version of a modern browser such as Google Chrome or Apple Safari. Opera and Firefox work as well, but the card won't lool as good (minor layout defaults).<br />
     <br />
     <br />
     <div class="ribbon">
@@ -57,9 +58,9 @@
         Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
 
         <script type="text/javascript">
-            color="99f88d"
+            color="99f88d";
 
-            $('#colorSelector div').css('backgroundColor', '#' + color);
+            $('#colorSelector div').css('backgroundColor','#' +color);
             $('#colorSelector').ColorPicker({
                 onChange: function(hsb, hex, rgb){
                     setColor(hex);
@@ -130,14 +131,14 @@
     Artist website: <input size="30" type="text" id="artist-website" value="drewho.deviantart.com" onChange="draw()"><br />
     
     <br />
-    <input style="visibility: hidden" type="submit" value="Save as PNG" onClick="saveAsPNG()" />
+    <button type="button" onClick="saveAsPNG()">Save image</button>
     </form>
     </div>
 
 
     <div id="drawing-zone" style="float: left;">
     <canvas id="canvas" width="270" height="410">
-    If you see this, then your browser is not supported. Please use the latest version of Google Chrome, Safari or Firefox.
+    If you see this, then your browser is not supported. See note above.
     </canvas>
     </div>
 
