@@ -58,9 +58,9 @@
         Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
 
         <script type="text/javascript">
-            color="99f88d"
+            color="99f88d";
 
-            $('#colorSelector div').css('backgroundColor', '#' + color);
+            $('#colorSelector div').css('backgroundColor','#' +color);
             $('#colorSelector').ColorPicker({
                 onChange: function(hsb, hex, rgb){
                     setColor(hex);
