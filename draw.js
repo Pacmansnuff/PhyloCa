@@ -90,9 +90,19 @@ function drawImage(context){
 
 function drawTitle(context, title){
     context.fillStyle = "rgb(0,0,0)"; //draw title
-    context.font         = 'bold 20px sans-serif';
+    
+    var fontSize=20;
+    var size=300;
+    //determine font size for string (needs to be moved in a function)
+    while (size>180){
+        context.font = 'bold '+fontSize+'px sans-serif';
+        size=Math.round(context.measureText(title).width);
+        fontSize--;
+    }
+
+
     context.textBaseline = 'top';
-    context.fillText  (title, 15, 15);
+    context.fillText  (title, 15, 35-fontSize);
 }
 
 function drawSubtitle(context, subtitle){
