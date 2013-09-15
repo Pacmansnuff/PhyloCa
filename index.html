@@ -78,7 +78,17 @@
     <br />    
     Common name: <input type="text" id="common-name" value="Scarlet Macaw"  onChange="draw()"/> <br />
     Latin name: <input type="text" id="latin-name" value="Ara Macao" onChange="draw()"> <br />
-    Scale:  <input type="text" id="scale" value="6" onChange="draw()"><br />
+    Scale:  <select id="scale" onChange="draw()">
+    	<option value="1">1 - Virus</option>
+    	<option value="2">2 - Single Celled</option>
+    	<option value="3">3 - Multi-Celled</option>
+    	<option value="4">4 - Insect</option>
+    	<option value="5">5 - Mouse</option>
+    	<option value="6" selected="selected">6 - Rabbit</option>
+    	<option value="7">7 - Goat</option>
+    	<option value="8">8 - Tiger</option>
+    	<option value="8">9 - Tree/Whale</option>
+    </select><br />
     Foodchain: <input type="text" id="foodchain-num" value="2" onChange="draw()"><br />
     Diet color: <input type="text" id="diet-type" value="3" onChange="draw()"><br />
     <br />
