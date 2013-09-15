@@ -17,18 +17,72 @@ function getCommonName(){
     return commonName.value;
 }
 
+function getEventName(){
+	var eventName = document.getElementById('event-name');
+    return eventName.value;
+}
+
+function getHomeName(){
+	var homeName = document.getElementById('home-name');
+    return homeName.value;
+}
+
 function getLatinName(){
 	var latinName = document.getElementById('latin-name');
     return latinName.value;
 }
 
-function getPointValue(){
+function getPointValue(){ //calculate points
 	var pointValue = document.getElementById('point-value');
-    return pointValue.value;
+	
+	var points = 0; //create variable
+	var foodChain = document.getElementById('diet-type');
+    var foodChainNum = foodChain.options[foodChain.selectedIndex].value;
+	switch(foodChainNum) { //starting score is based on diet
+		case "1": //autotroph
+		case "2": //mineral
+			points = 2;
+			break;
+		case "3": //herbivore
+			points = 4;
+			break;
+		case "4": //omnivore
+			points = 3;
+			break;
+		case "5": //carnivore
+		case "6":
+			points = 7;
+			break;
+	}
+	var climateCount = -2; //2 climates is free, each additional costs a point
+	if (document.getElementById('hot').checked)
+        climateCount++;
+    if (document.getElementById('warm').checked)
+		climateCount++;
+    if (document.getElementById('cool').checked)
+		climateCount++;
+    if (document.getElementById('cold').checked)
+		climateCount++;
+	points -= climateCount;
+	var habitatCount = -2; //2 habitats is free, each additonal costs a point
+	for (i=0;i<7;i++){
+        if(document.getElementById('terrain'+(i+1)).checked)
+			habitatCount++;
+    }
+	points -= habitatCount;
+	var travelDistance = document.getElementById('travel-distance'); //subtract 1 for movement greater than 2
+	var travelDistanceValue = travelDistance.options[travelDistance.selectedIndex].value;
+	if(travelDistanceValue == "3" || travelDistanceValue == "4" || travelDistanceValue == "5")
+		points--;
+	if(document.getElementById('invasive').checked)
+		points--;
+	if(document.getElementById('specific-diet').checked)
+		points++;
+    return points;
 }
 
 function getScale(){
-    var scale= document.getElementById('scale');
+    var scale = document.getElementById('scale');
     return scale.options[scale.selectedIndex].value;
 }
 
@@ -47,9 +101,17 @@ function getArtistWebsite(){
     return artistWebsite.value;
 }
 
-function getImagePath(){
-    var image = document.getElementById('image');
-    return image.value;
+function getImagePath(image){
+	var input = document.getElementById('image2');
+    if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			image.src = reader.result;
+			console.log(reader.result);
+        }
+		reader.readAsDataURL(input.files[0]);
+	}
+	return "";
 }
 
 function getFoodchainNum(){
@@ -67,11 +129,7 @@ function getFoodchainNum(){
 
 function getDietType(){
     var dietType = document.getElementById('diet-type');
-    var dietTypeNum = dietType.options[dietType.selectedIndex].value;
-    if(dietTypeNum == 6) //Apex Predators are carnivores and should just get color 5
-    	return 5;
-    else
-    	return dietTypeNum;
+    return dietType.options[dietType.selectedIndex].value;
 }
 
 function getClimates(){
@@ -110,12 +168,42 @@ function getDescription(){
     return description;
 }
 
+function getEffect(){
+    var description= new Array();
+
+    for (i=0;i<4;i++){
+        description[i]=document.getElementById('event-desc'+(i+1)).value;
+    }
+	
+	description[0] = "Effect: " + description[0];
+
+    return description;
+}
+
 function getSpecial(){
     var special= new Array();
-
-    for (i=0;i<5;i++){
+	
+	var travelType = document.getElementById('travel-type');
+	var travelDistance = document.getElementById('travel-distance');
+	if(travelType.options[travelType.selectedIndex].value != "IMMOBILE")
+		special[0] = "Play: " +  getLatinName() + " has a " + travelType.options[travelType.selectedIndex].value + " of " + travelDistance.options[travelDistance.selectedIndex].value + "."
+	else
+		special[0] = "";
+    for (i=1;i<4;i++){
         special[i]=document.getElementById('special'+(i+1)).value;
     }
+
+    return special;
+}
+
+function getPlay(){
+    var special= new Array();
+	
+    for (i=0;i<4;i++){
+        special[i]=document.getElementById('event-special'+(i+1)).value;
+    }
+	
+	special[0] = "Play: " + special[0];
 
     return special;
 }
@@ -179,4 +267,28 @@ function buildTerrainArray(terrains){
     }
 
     return array;
+}
+
+function switchForm() {
+	if(document.getElementById('organism').checked)
+		document.getElementById('Organism').style.display = "block";
+	else
+		document.getElementById('Organism').style.display = "none";
+	if(document.getElementById('event').checked)
+		document.getElementById('Event').style.display = "block";
+	else
+		document.getElementById('Event').style.display = "none";
+	if(document.getElementById('home').checked)
+		document.getElementById('Home').style.display = "block";
+	else
+		document.getElementById('Home').style.display = "none";
+}
+
+function getType() {
+	if(document.getElementById('organism').checked)
+		return "Organism";
+	if(document.getElementById('event').checked)
+		return "Event";
+	if(document.getElementById('home').checked)
+		return "Home";
 }
