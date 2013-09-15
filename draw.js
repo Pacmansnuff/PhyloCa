@@ -179,7 +179,7 @@ function drawFoodchainNum(context, num){
     context.fillStyle = "rgb(255,255,255)";
     context.font         = 'bold 24px serif';
     context.textBaseline = 'top';
-    context.fillText(num, 233, 17);  
+    context.fillText(num, 234, 17);  
 }
 
 function drawScale(context, scale){
@@ -223,7 +223,7 @@ function drawClimate(context, climates){
 
     if (climates & 0x8){
         if (climateCount==1){
-            context.fillText(",", 220, 385-bottomLine*15); 
+            context.fillText(",", 218, 385-bottomLine*15); 
             context.fillText("Cold", 193, 385-bottomLine*15); 
         } else {
             context.fillText("Cold", 225, 385-bottomLine*15); 
