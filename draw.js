@@ -18,41 +18,73 @@ function draw() {
         var ctx = canvas.getContext("2d");
     }
 
-
-    //get values
-    var commonName=getCommonName();
-    var latinName=getLatinName();
-    var evolutionaryTree=getEvolutionaryTree();
-    var pointValue=getPointValue();
-    var scale=getScale();
-    var foodchainNum=getFoodchainNum();
-    var artistName=getArtistName();
-    var artistWebsite=getArtistWebsite();
-    var dietType=getDietType();
-    var climates=getClimates();
-    var special=getSpecial();
-    var desc=getDescription();
-    var terrains= getTerrains();
-    //var color=getColor();
-    
-    //draw
-    drawTerrains(ctx, terrains);
-    drawBackground(ctx, color);
-    drawImage(ctx);
-    drawTitle(ctx, commonName);
-    drawSubtitle(ctx, latinName);
-    drawDietCircle(ctx, dietType);
-    drawEvolutionaryTree(ctx, evolutionaryTree)
-    drawPointValue(ctx,pointValue);
-    drawScale(ctx, scale);
-    drawFoodchainNum(ctx, foodchainNum);
-    drawArtistName(ctx, artistName);
-    drawArtistWebsite(ctx, artistWebsite);
-    drawCCMentions(ctx);
-    drawClimate(ctx, climates);
-    drawSpecial(ctx, special);
-    drawDescription(ctx, desc);
-    
+	if(getType() == "Organism") {
+		//get values
+		var commonName=getCommonName();
+		var latinName=getLatinName();
+		var evolutionaryTree=getEvolutionaryTree();
+		var pointValue=getPointValue();
+		var scale=getScale();
+		var foodchainNum=getFoodchainNum();
+		var artistName=getArtistName();
+		var artistWebsite=getArtistWebsite();
+		var dietType=getDietType();
+		var climates=getClimates();
+		var special=getSpecial();
+		var desc=getDescription();
+		var terrains= getTerrains();
+		
+		//draw
+		drawTerrains(ctx, terrains);
+		drawBackground(ctx, color);
+		drawImage(ctx);
+		drawTitle(ctx, commonName);
+		drawSubtitle(ctx, latinName);
+		drawDietCircle(ctx, dietType);
+		drawEvolutionaryTree(ctx, evolutionaryTree);
+		drawPointValue(ctx,pointValue);
+		drawScale(ctx, scale);
+		drawFoodchainNum(ctx, foodchainNum);
+		drawArtistName(ctx, artistName);
+		drawArtistWebsite(ctx, artistWebsite);
+		drawCCMentions(ctx);
+		drawClimate(ctx, climates);
+		drawSpecial(ctx, special);
+		drawDescription(ctx, desc);*/
+	}
+	else if(getType() == "Event") {
+		var eventName=getEventName();
+		var artistName=getArtistName();
+		var artistWebsite=getArtistWebsite();
+		var play=getPlay();
+		var effect=getEffect();
+		
+		drawBackground(ctx, color);
+		drawImage(ctx);
+		drawTitle(ctx, eventName);
+		drawSubtitle(ctx, "Event Card");
+		drawEvolutionaryTree(ctx, "Event");
+		drawArtistName(ctx, artistName);
+		drawArtistWebsite(ctx, artistWebsite);
+		drawSpecial(ctx, play);
+		drawDescription(ctx, effect);
+		drawCCMentions(ctx);
+	}
+	
+	else if(getType() == "Home") {
+		var homeName=getHomeName();
+		
+		drawBackground(ctx, color);
+		drawImage(ctx);
+		drawTitle(ctx, "Home Card");
+		drawSubtitle(ctx, homeName);
+		drawEvolutionaryTree(ctx, "Starter");
+		drawArtistName(ctx, artistName);
+		drawArtistWebsite(ctx, artistWebsite);
+		drawSpecial(ctx, ["This is a HOME card. The game starts with", "each player having a HOME card played on the", "table next to each other."]);
+		drawDescription(ctx, ["Home cards represent all TERRAIN", "and CLIMATE values."]);
+		drawCCMentions(ctx);
+    }
 }
 
 function hex2rgb(hex) { //needs to be moved to utilities.js
@@ -82,7 +114,7 @@ function drawBackground(context, color){
 
 function drawImage(context){
     var image = new Image();
-    image.src = getImagePath(); //we get the path from the html input
+    image.src = getImagePath(image); //we get the path from the html input
     image.onload = function() {
         context.drawImage(image, 10, 60, 250, 153);
     };
@@ -132,6 +164,7 @@ function drawDietCircle(context, type){
             context.fillStyle = "rgb(127,59,0)";
             break;
         case "5":
+		case "6":
             context.fillStyle = "rgb(255,0,0)";
             break;
     }
@@ -267,7 +300,7 @@ function drawSpecial(context, special){
     context.font         = '11px sans-serif';
     context.textBaseline = 'top';
 
-    for (i=0;i<5;i++){
+    for (i=0;i<special.length;i++){
         context.fillText(special[i], 15, 250+i*12);
     }        
 }
@@ -277,8 +310,7 @@ function drawDescription(context, description){
     context.font         = 'italic 11px sans-serif';
     context.textBaseline = 'top';
   
-    for (i=0;i<3;i++){
+    for (i=0;i<description.length;i++){
         context.fillText(description[i], 15, 315+i*12);
     }        
 }
-
