@@ -67,7 +67,7 @@ function getFoodchainNum(){
 
 function getDietType(){
     var dietType = document.getElementById('diet-type');
-    var dietTypeNum = dietType.options[dietType].selectedIndex].value;
+    var dietTypeNum = dietType.options[dietType.selectedIndex].value;
     if(dietTypeNum == 6) //Apex Predators are carnivores and should just get color 5
     	return 5;
     else
