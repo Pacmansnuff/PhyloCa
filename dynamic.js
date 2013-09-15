@@ -53,13 +53,25 @@ function getImagePath(){
 }
 
 function getFoodchainNum(){
-    var foodchain = document.getElementById('foodchain-num');
-    return foodchain.value;
+    var foodChain = document.getElementById('diet-type');
+    var foodChainNum = foodChain.options[foodChain.selectedIndex].value;
+    if(foodChainNum == 1 || foodChainNum == 2) //autotorphs and mineral consumers get 1
+    	return 1;
+    else if(foodChainNum == 3 || foodChainNum == 4) //herbivores and omnivores get 2
+    	return 2;
+    else if(foodChainNum == 5) //carnivores get 3
+    	return 3;
+    else //apex predators get 4
+    	return 4;
 }
 
 function getDietType(){
-    var dietType= document.getElementById('diet-type');
-    return dietType.value;
+    var dietType = document.getElementById('diet-type');
+    var dietTypeNum = dietType.options[dietType].selectedIndex].value;
+    if(dietTypeNum == 6) //Apex Predators are carnivores and should just get color 5
+    	return 5;
+    else
+    	return dietTypeNum;
 }
 
 function getClimates(){
