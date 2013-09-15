@@ -89,8 +89,14 @@
     	<option value="8">8 - Tiger</option>
     	<option value="8">9 - Tree/Whale</option>
     </select><br />
-    Foodchain: <input type="text" id="foodchain-num" value="2" onChange="draw()"><br />
-    Diet color: <input type="text" id="diet-type" value="3" onChange="draw()"><br />
+    Diet and Foodchain: <select id="diet-type" onChange="draw()">
+    	<option value="1">Autotroph</option>
+    	<option value="1">Mineral</option>
+    	<option value="2" selected="selected">Herbivore</option>
+    	<option value="3">Omnivore</option>
+    	<option value="3">Carnivore</option>
+    	<option value="4">Apex Predator</option>
+    </select><br />
     <br />
     
     Path to image: <input type="text" id="image" value="http://farm6.static.flickr.com/5219/5386837958_9ebd5be82b_o_d.jpg" onChange="draw();"><br /> 
