@@ -29,7 +29,7 @@ function getPointValue(){
 
 function getScale(){
     var scale= document.getElementById('scale');
-    return scale.value;
+    return scale.options[scale.selectedIndex].value;
 }
 
 function getEvolutionaryTree(){
