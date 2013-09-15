@@ -50,7 +50,7 @@ function draw() {
 		drawCCMentions(ctx);
 		drawClimate(ctx, climates);
 		drawSpecial(ctx, special);
-		drawDescription(ctx, desc);*/
+		drawDescription(ctx, desc);
 	}
 	else if(getType() == "Event") {
 		var eventName=getEventName();
