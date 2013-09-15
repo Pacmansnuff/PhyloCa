@@ -107,7 +107,6 @@ function getImagePath(image){
 		var reader = new FileReader();
 		reader.onloadend = function() {
 			image.src = reader.result;
-			console.log(reader.result);
         }
 		reader.readAsDataURL(input.files[0]);
 	}
