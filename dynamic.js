@@ -109,8 +109,11 @@ function getImagePath(image){
 			image.src = reader.result;
         }
 		reader.readAsDataURL(input.files[0]);
+		return "";
 	}
-	return "";
+	else
+		return "resources/default_image.jpg";
+	
 }
 
 function getFoodchainNum(){
