@@ -7,6 +7,10 @@
 // clauses it is shared.
 //
 // http://github.com/gardaud/phylocc
+//
+//
+// Forked and modified by Ivan Hayward
+// http://github.com/acarcana/phylocc
 ///////////////////////////////////////
 -->
  
@@ -30,12 +34,32 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="dynamic.js"></script>
     <script type="text/javascript" src="draw.js"></script>
+	<script src="base64.js" type="text/javascript"></script>
+	<script src="canvas2image.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	function saveCanvas(strType) {
+		var bRes = false;
+		if (strType == "PNG")
+			bRes = Canvas2Image.saveAsPNG(document.getElementById("canvas"));
+		if (strType == "BMP")
+			bRes = Canvas2Image.saveAsBMP(document.getElementById("canvas"));
+		if (strType == "JPEG")
+			bRes = Canvas2Image.saveAsJPEG(document.getElementById("canvas"));
+
+		if (!bRes) {
+			alert("Sorry, this browser is not capable of saving " + strType + " files!");
+			return false;
+		}
+	}
+	</script>
+
 </head>
     
     <body onload="draw()">
     <h1>Phylo- web based card creator</h1>
-    Code by Guillaume Ardaud, under the MIT license. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.<br />
-    Please use the latest version of a modern browser such as Google Chrome or Apple Safari. Opera and Firefox work as well, but the card won't lool as good (minor layout defaults).<br />
+    Code by Guillaume Ardaud, under the MIT license. Edited by Ivan Hayward. More info on Phylo at <a href="http://www.phylogame.org">Phylogame.org</a>.<br />
+    Please use the latest version of a modern browser such as Google Chrome or Apple Safari. Opera and Firefox work as well, but the card won't look as good (minor layout defaults).<br />
     <br />
     <br />
     <div class="ribbon">
@@ -47,15 +71,18 @@
 
     <div id="controls" style="float:right; width:500px;">
     <form name="parameters" action="post">
-    Card type: <input type="radio" name="card-type" value="organism" checked="checked">Organism
-    <input type="radio" name="card-type" value="habitat" disabled="disabled">Habitat
-    <input type="radio" name="card-type" value="event" disabled="disabled">Event
-    <input type="radio" name="card-type" value="starter" disabled="disabled">Starter
+    Card type: <input type="radio" name="card-type" id="organism" value="organism" checked="checked" onChange="switchForm();draw();">Organism
+    <input type="radio" name="card-type" id="event" value="event" onChange="switchForm();draw();">Event
+	<input type="radio" name="card-type" id="home" value="home" onChange="switchForm();draw();">Home
     <br />
     <br />
-        
-
-        Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div>
+	
+	<div style="border-style:groove;">
+	Upload an Image: <input type="file" id="image2" accept="image/gif, image/jpeg, image/png" onChange="draw();"><br />
+    Artist name: <input size="30"  type="text" id="artist-name" value="Drewho" onChange="draw()"><br />
+    Artist website: <input size="30" type="text" id="artist-website" value="drewho.deviantart.com" onChange="draw()"><br />
+	<div style="height:40px;">Background color: <div id="colorSelector"><div style="background-color: #0000ff"></div></div></div>
+	</div>
 
         <script type="text/javascript">
             color="99f88d";
@@ -72,24 +99,45 @@
             </script>
     <br />
     <br />
-
-    <br />    
+	<div id="Organism" style="border-style:groove;">
     Common name: <input type="text" id="common-name" value="Scarlet Macaw"  onChange="draw()"/> <br />
     Latin name: <input type="text" id="latin-name" value="Ara Macao" onChange="draw()"> <br />
-    Scale:  <input type="text" id="scale" value="6" onChange="draw()"><br />
-    Foodchain: <input type="text" id="foodchain-num" value="2" onChange="draw()"><br />
-    Diet color: <input type="text" id="diet-type" value="3" onChange="draw()"><br />
-    <br />
-    
-    Path to image: <input type="text" id="image" value="http://farm6.static.flickr.com/5219/5386837958_9ebd5be82b_o_d.jpg" onChange="draw();"><br /> 
+    Scale:  <select id="scale" onChange="draw()">
+    	<option value="1">1 - Virus</option>
+    	<option value="2">2 - Single Celled</option>
+    	<option value="3">3 - Multi-Celled</option>
+    	<option value="4">4 - Insect</option>
+    	<option value="5">5 - Mouse</option>
+    	<option value="6" selected="selected">6 - Rabbit</option>
+    	<option value="7">7 - Goat</option>
+    	<option value="8">8 - Tiger</option>
+    	<option value="9">9 - Tree/Whale</option>
+    </select><br />
+    Diet and Foodchain: <select id="diet-type" onChange="draw()">
+    	<option value="1">Autotroph</option>
+    	<option value="2">Mineral</option>
+    	<option value="3">Herbivore</option>
+    	<option value="4" selected="selected">Omnivore</option>
+    	<option value="5">Carnivore</option>
+    	<option value="6">Apex Predator</option>
+    </select><br />
 
-    <br />
     Evolutionary tree: <input size="30" type="text" id="evolutionary-tree" value="Animalia, Chordata, Aves" onChange="draw()"><br />    
-    Point value: <input type="text" id="point-value" value="5" onChange="draw()"><br />
-    <br />
-    
-        Special: <br />
-        <input type="text" size="50" id="special1" onChange="draw()" value="Ara macao has a FLIGHT of 2."/><br />
+	Travel: <select id="travel-type" onChange="draw()">
+		<option value="IMMOBILE">Immobile</option>
+		<option value="MOVE">Move</option>
+		<option value="FLIGHT" selected="selected">Flight</option>
+		<option value="SPREAD">Spread</option>
+	</select> 
+	<select id="travel-distance" onChange="draw()">
+		<option value="1">1</option>
+		<option value="2" selected="selected">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	<br />
+		Specific Diet: <input type="checkbox" id="specific-diet" onChange="draw()"> Invasive: <input type="checkbox" id="invasive" onChange="draw()"> (Please add details)<br />
         <input type="text" size="50" id="special2" onChange="draw()" value=""/><br />
         <input type="text" size="50" id="special3" onChange="draw()" value=""/><br />
         <input type="text" size="50" id="special4" onChange="draw()" value=""/><br />
@@ -99,9 +147,9 @@
         <br />
         
         Description: <br />
-        <input type="text" size="50" id="desc1" onChange="draw()" value="Ara macao make very loud, high &amp; sometimes "/><br />
-        <input type="text" size="50" id="desc2" onChange="draw()" value="low-pitched, throaty sounds that can be heard"/><br />
-        <input type="text" size="50" id="desc3" onChange="draw()" value="from many miles away."/><br />
+        <input type="text" size="50" id="desc1" onChange="draw()" value="Fact: Ara Macao make very loud, high &amp;"/><br />
+        <input type="text" size="50" id="desc2" onChange="draw()" value="sometimes low-pitched, throaty sounds that can"/><br />
+        <input type="text" size="50" id="desc3" onChange="draw()" value="be heard from many miles away."/><br />
         <br />
 
     
@@ -123,16 +171,26 @@
         <input onChange="draw()" type="checkbox" name="terrain" id="terrain5"/>Ocean
         <input onChange="draw()" type="checkbox" name="terrain" id="terrain6"/>Tundra
         <input onChange="draw()" type="checkbox" name="terrain" id="terrain7"/>Urban
-
-        
-    <br />
-    <br />
-    Artist name: <input size="30"  type="text" id="artist-name" value="Drewho" onChange="draw()"><br />
-    Artist website: <input size="30" type="text" id="artist-website" value="drewho.deviantart.com" onChange="draw()"><br />
+	</div>
+	
+	<div id="Event" style="border-style:groove;display:none;">
+	Name: <input type="text" id="event-name" value="Oil Spill"  onChange="draw()"/> <br />
+	Play: <br/>
+	<input type="text" size="50" id="event-special1" onChange="draw()" value="Place this card on any ocean or fresh"/><br />
+	<input type="text" size="50" id="event-special2" onChange="draw()" value="water based SPECIES card."/><br />
+	<input type="text" size="50" id="event-special3" onChange="draw()" value=""/><br />
+	<input type="text" size="50" id="event-special4" onChange="draw()" value=""/><br />
+	Effect: <br />
+	<input type="text" size="50" id="event-desc1" onChange="draw()" value="The SPECIES card is IMMEDIATELY"/><br />
+	<input type="text" size="50" id="event-desc2" onChange="draw()" value="discarded."/><br />
+	<input type="text" size="50" id="event-desc3" onChange="draw()" value=""/><br />
+	<input type="text" size="50" id="event-desc4" onChange="draw()" value=""/><br />
+	</div>
+	<div id="Home" style="border-style:groove;display:none;">
+	Name: <input type="text" id="home-name" value="House"  onChange="draw()"/> <br />
+	</div>
     
-    <br />
-    <button type="button" onClick="saveAsPNG()">Save image</button>
-    </form>
+	</form>
     </div>
 
 
@@ -140,6 +198,14 @@
     <canvas id="canvas" width="270" height="410">
     If you see this, then your browser is not supported. See note above.
     </canvas>
+	<br />
+	<div id="buttoncontainer" style="display:block;">
+	<input type="button" onClick='saveCanvas("PNG");' value="Save PNG">
+	<br/>
+	<input type="button" onClick='saveCanvas("BMP");' value="Save BMP">
+	<br/>
+	<input type="button" onClick='saveCanvas("JPEG");' value="Save JPEG">
+	</div>
     </div>
 
 
